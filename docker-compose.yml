@@ -1,0 +1,17 @@
+services:
+  keyframe-service:
+    image: keyframe
+    container_name: keyframe-service
+    privileged: true
+    ports:
+      - "8117:8117"   
+    volumes:
+      - ./static:/app/static
+      - /home/Downloads/dify-main/docker/volumes/app/storage:/app/api/storage
+    restart: always
+    networks:
+    - docker_default 
+
+networks:
+  docker_default:      
+    external: true

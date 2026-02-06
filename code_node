@@ -1,0 +1,32 @@
+import json
+
+def main(input_text: str) -> dict:
+    """
+    将双重转义的 JSON 字符串解析为标准文件列表
+    
+    Args:
+        input_text: 上一节点的 text 字段（可能包含双重转义的 JSON）
+    
+    Returns:
+        包含 files 列表的字典
+    """
+    try:
+        # 第一次解析
+        parsed = json.loads(input_text)
+        
+        # 如果结果还是字符串，说明是双重转义，再解析一次
+        if isinstance(parsed, str):
+            parsed = json.loads(parsed)
+        
+        # 提取 files 列表
+        files_list = parsed.get("files", [])
+        
+        return {
+            "files": files_list
+        }
+        
+    except Exception as e:
+        return {
+            "files": [],
+            "error": f"JSON 解析失败: {str(e)}"
+        }
