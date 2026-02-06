@@ -76,7 +76,7 @@ def download_video(url: str, temp_dir: str) -> str:
         raise HTTPException(status_code=400, detail=f"下载失败: {e}")
 
 
-# === 新增：视频修复函数 ===
+
 def repair_video_if_needed(video_path: str) -> str:
     """
     检查视频是否能被 OpenCV 正常打开。
@@ -230,7 +230,7 @@ def extract_frames_by_indices(video_path, frame_indices, output_dir):
     return extracted_paths
 
 
-# === 上传文件到 Dify（保留你的接口地址）===
+
 def upload_file_to_dify(file_path: str, filename: str, auth_header: str) -> dict:
     try:
         with open(file_path, "rb") as f:
@@ -239,7 +239,7 @@ def upload_file_to_dify(file_path: str, filename: str, auth_header: str) -> dict
             headers = {"Authorization": auth_header}
 
             resp = requests.post(
-                "http://192.168.2.112:58080/v1/files/upload",
+                "http://192.168.1.100:8080/v1/files/upload",
                 files=files,
                 data=data,
                 headers=headers,
@@ -382,4 +382,5 @@ async def extract_keyframes_api(request: KeyframeExtractionRequest, raw_request:
         shutil.rmtree(temp_dir, ignore_errors=True)
 
 if __name__ == "__main__":
+
     uvicorn.run(app, host="0.0.0.0", port=8117)
