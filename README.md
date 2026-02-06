@@ -21,6 +21,7 @@ project/
 │   ├── app.py
 │   └── start.sh
 ├── pip_depends/           # 离线 .whl 依赖包
+├── deploy.sh/
 └── docker-compose.yml
 ```
 
